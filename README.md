@@ -16,6 +16,8 @@
 
 ###Release 0 : Refactor SQL Into the Base Class
 
+Copy the `active_record_jr` directory from your ActiveRecord Jr. 1 challenge into the source directory for this challenge and start from that code.
+
 Remember, the base class only knows what it's told.  Somehow the `Student` and `Cohort` classes will have to get the following information to the base class:
 
 1. What table am I associated with?
