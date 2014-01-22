@@ -169,5 +169,18 @@ module Database
       results
     end
 
+   def update!
+      self[:updated_at] = DateTime.now
+
+      fields = self.attributes.keys
+      values = self.attributes.values
+
+      update_clause = fields.map { |field| "#{field} = ?" }.join(',')
+      update_sql = "UPDATE #{self.class}s SET #{update_clause} WHERE id = ?"
+
+      # We have to use the (potentially) old ID attributein case the user has re-set it.
+      Database::Model.execute(update_sql, *values, self.old_attributes[:id])
+    end
+
 end
 end

@@ -27,3 +27,6 @@ require_relative 'app'
 duchess = Student.create({:first_name => 'Sterling', :last_name => 'Archer', :email => 'sterlingarcher@isis.com', :gender => 'm', :birthdate => '1979-06-25'})
 duchess.save
 p Student.where('first_name =?', 'Sterling')
+duchess[:email] = 'missingkatya@isis.com'
+duchess.save
+p Student.where('first_name =?', 'Sterling')
