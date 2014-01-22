@@ -5,6 +5,19 @@ module Database
   class NotConnectedError < StandardError;end
 
   class Model
+
+    def self.all
+      Database::Model.execute("SELECT * FROM #{self.table_name}").map do |row|
+        self.new(row)
+      end
+    end
+
+    def self.where(query, *args)
+      Database::Model.execute("SELECT * FROM #{self.table_name} WHERE #{query}", *args).map do |row|
+        self.new(row)
+      end
+    end
+
     def self.inherited(klass)
     end
 
@@ -15,7 +28,6 @@ module Database
     def self.create(attributes)
       record = self.new(attributes)
       record.save
-
       record
     end
 
@@ -140,5 +152,35 @@ module Database
         value
       end
     end
-  end
-end
+
+    def insert!
+      self[:created_at] = DateTime.now
+      self[:updated_at] = DateTime.now
+
+      fields = self.attributes.keys
+      values = self.attributes.values
+      marks  = Array.new(fields.length) { '?' }.join(',')
+
+      insert_sql = "INSERT INTO #{self.table_name} (#{fields.join(',')}) VALUES (#{marks})"
+
+      results = Database::Model.execute(insert_sql, *values)
+
+      # This fetches the new primary key and updates this instance
+      self[:id] = Database::Model.last_insert_row_id
+      results
+    end
+
+    def update!
+      self[:updated_at] = DateTime.now
+
+      fields = self.attributes.keys
+      values = self.attributes.values
+
+      update_clause = fields.map { |field| "#{field} = ?" }.join(',')
+      update_sql = "UPDATE #{self.table_name} SET #{update_clause} WHERE id = ?"
+
+      # We have to use the (potentially) old ID attribute in case the user has re-set it.
+      Database::Model.execute(update_sql, *values, self.old_attributes[:id])
+    end # of method
+  end # of class
+end # of module
