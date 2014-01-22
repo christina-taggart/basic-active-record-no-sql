@@ -27,6 +27,10 @@ module Database
       end
     end
 
+    def self.find(pk)
+      self.where('id = ?', pk).first
+    end
+
     def self.filename
       @filename
     end
