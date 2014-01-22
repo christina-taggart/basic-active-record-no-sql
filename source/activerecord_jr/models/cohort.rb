@@ -2,7 +2,6 @@ class Cohort < Database::Model
 
   # CLASS METHODS
 
-
   def self.table_name
     "cohorts"
   end
@@ -27,9 +26,5 @@ class Cohort < Database::Model
     end
 
     students
-  end
-
-  def new_record?
-    self[:id].nil?
   end
 end

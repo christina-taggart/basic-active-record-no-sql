@@ -2,7 +2,6 @@ class Student < Database::Model
 
   # CLASS METHODS
 
-
   def self.table_name
     "students"
   end
@@ -16,12 +15,6 @@ class Student < Database::Model
 
   def table_name
     "students"
-  end
-
-  # We say a record is "new" if it doesn't have a defined primary key in its
-  # attributes
-  def new_record?
-    self[:id].nil?
   end
 
   def cohort

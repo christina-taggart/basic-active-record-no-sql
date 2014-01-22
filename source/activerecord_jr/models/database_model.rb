@@ -132,6 +132,10 @@ module Database
       self.class.attribute_names.include? attribute
     end
 
+    def new_record?
+      self[:id].nil?
+    end
+
     private
 
     def self.prepare_value(value)
