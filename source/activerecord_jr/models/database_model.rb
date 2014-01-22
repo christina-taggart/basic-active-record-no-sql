@@ -21,6 +21,12 @@ module Database
       record
     end
 
+    def self.where(query, *args)
+      Database::Model.execute("SELECT * FROM #{self.table_name} WHERE #{query}", *args).map do |row|
+        self.new(row)
+      end
+    end
+
     def self.filename
       @filename
     end
