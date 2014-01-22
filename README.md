@@ -1,14 +1,20 @@
-# Activerecord Jr 2 Sql Be Gone 
+# ActiveRecord Jr 2 SQL Be Gone 
  
 ##Learning Competencies 
+
+* Use Ruby commands to encapsulate standard SQL CRUD operations on a relational database
+* Abstract a pattern for a model after identifying repetitions in code and relationships in data
+* Organize code for consistency and readability
+* Use database tools (like sqlite3) to view data and test outcomes of Ruby code
+* Build test methods with descriptive output and clear indicators of passing tests.
 
 ##Summary 
 
  In the last version of the challenge we refactored some simple methods into the base `Database::Model` class, but none of those methods contained actual SQL.  All student-specific SQL remained in the `Student` class.  Let's change that.
 
-## Objectives
+##Releases
 
-### Refactor SQL Into the Base Class
+###Release 0 : Refactor SQL Into the Base Class
 
 Remember, the base class only knows what it's told.  Somehow the `Student` and `Cohort` classes will have to get the following information to the base class:
 
@@ -28,13 +34,7 @@ One possible strategy for this is to see how we set `attribute_names`.  There ar
 
 Feel free to play around in the ActiveRecord, Jr. console to get a feel for how it works.  And **remember**, once a method is moved to `Database::Model` you might need to change hard-coded references to the classes the method came from.
 
-### Submit Your Refactored Code
 
-Upload `student.rb`, `cohort.rb`, and `database_model.rb` as a gist with three separate files.  You can add multiple files to a gist by clicking the "Add Another File" button. 
-
-##Releases
-###Release 0 
-
-##Optimize Your Learning 
+<!-- ##Optimize Your Learning  -->
 
 ##Resources
