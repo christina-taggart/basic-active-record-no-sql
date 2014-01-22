@@ -15,6 +15,12 @@ module Database
       @connection
     end
 
+    def self.create(attributes)
+      record = self.new(attributes)
+      record.save
+      record
+    end
+
     def self.filename
       @filename
     end
