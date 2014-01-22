@@ -67,6 +67,12 @@ module Database
       @old_attributes = @attributes.dup
     end
 
+    def self.all
+      Database::Model.execute("SELECT * FROM #{table_name}").map do |row|
+        self.class.new(row)
+      end
+    end
+
     def save
       if new_record?
         results = insert!

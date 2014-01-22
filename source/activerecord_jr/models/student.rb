@@ -2,12 +2,6 @@ class Student < Database::Model
 
   # CLASS METHODS
 
-  def self.all
-    Database::Model.execute("SELECT * FROM students").map do |row|
-      Student.new(row)
-    end
-  end
-
   def self.create(attributes)
     record = self.new(attributes)
     record.save
